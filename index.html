@@ -11,50 +11,234 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
 <style>
-  :root {
-    --bg:#f4f6ff;           
-    --bg-2:#e8ecff;        
-    --fg:#1b1d33;          
-    --muted:#5f6588;       
-    --accent:#ff9acb;      
-    --accent-2:#8ab6ff;    
-    --card:#ffffffdd;      
-    --ring:#d9ddff;        
-    --chip:#eef1ff;        
-    --shadow: 0 10px 30px #0001;
-  }
-  [data-theme="dark"]{
-    --bg:#0f1224;           
-    --bg-2:#14183a;         
-    --fg:#e8ebff;           
-    --muted:#aab0d6;         
-    --accent:#ff72b3;       
-    --accent-2:#7aa2ff;     
-    --card:#171c3cbb;      
-    --ring:#2b3168;         
-    --chip:#242a56;         
-    --shadow: 0 10px 40px #0006;
-  }
+/* ========= ROOT COLORS — pastel + modern ========= */
+:root {
+  --bg:#f6f7ff;
+  --bg-2:#edf0ff;
+  --fg:#1d213a;
+  --muted:#6e7391;
+  --accent:#ff8ec0;
+  --accent-2:#8eb5ff;
+  --card:#ffffffcc;
+  --chip:#eef1ff;
+  --ring:#dfe3ff;
+  --shadow:0 12px 40px #0002;
+}
 
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:"Poppins", sans-serif;
-    background:var(--bg);
-    color:var(--fg);
-  }
+[data-theme="dark"] {
+  --bg:#0d1023;
+  --bg-2:#151832;
+  --fg:#e9ebff;
+  --muted:#a8aed8;
+  --accent:#ff71b3;
+  --accent-2:#7ba2ff;
+  --card:#1a1f3ccc;
+  --chip:#252b56;
+  --ring:#252b52;
+  --shadow:0 12px 40px #0007;
+}
 
-  .avatar {
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    object-fit:cover;
-    border:3px solid var(--accent);
-    box-shadow:0 4px 20px #0002;
-    margin-bottom:16px;
-  }
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:"Poppins", sans-serif;
+  background:var(--bg);
+  color:var(--fg);
+  line-height:1.6;
+}
 
-  /* keep the rest of your CSS unchanged */
+/* ========= AVATAR (smaller, rounded, center shadow) ========= */
+.avatar {
+  width:130px;
+  height:130px;
+  object-fit:cover;
+  border-radius:50%;
+  border:3px solid var(--accent);
+  box-shadow:0 10px 30px #0002;
+  background:#fff;
+}
+
+/* ========= Header / Navbar ========= */
+header {
+  width:100%;
+  backdrop-filter:blur(14px);
+  background:var(--card);
+  position:fixed;
+  top:0; left:0;
+  z-index:1000;
+  box-shadow:var(--shadow);
+}
+
+nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 0;
+}
+
+.brand {
+  font-size:20px;
+  font-weight:700;
+}
+
+.nav-links {
+  list-style:none;
+  display:flex;
+  gap:28px;
+}
+
+.nav-links a {
+  text-decoration:none;
+  color:var(--fg);
+  font-weight:500;
+  transition:.25s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color:var(--accent);
+}
+
+/* ========= Hero Section ========= */
+.hero {
+  text-align:center;
+  padding:160px 20px 100px;
+  background:linear-gradient(180deg, var(--bg), var(--bg-2));
+}
+
+.eyebrow {
+  font-size:15px;
+  opacity:.7;
+  letter-spacing:1px;
+}
+
+.title {
+  margin-top:8px;
+  font-size:36px;
+  font-weight:700;
+}
+
+.scrolling-title {
+  margin-top:5px;
+  padding:6px 16px;
+  background:var(--accent-2);
+  color:#fff;
+  border-radius:20px;
+  display:inline-block;
+  font-size:15px;
+}
+
+/* ========= Section Base Styling ========= */
+section {
+  padding:80px 0;
+}
+
+.section-title {
+  font-size:26px;
+  margin-bottom:26px;
+  font-weight:600;
+}
+
+/* ========= Card (Glass Look) ========= */
+.card {
+  background:var(--card);
+  padding:28px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);
+}
+
+/* ========= Skills ========= */
+.skills-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  gap:24px;
+}
+
+.skills-group h3 {
+  margin-bottom:10px;
+  font-weight:600;
+}
+
+.bar {
+  width:100%;
+  height:9px;
+  background:#cfd4ff55;
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.bar > span {
+  display:block;
+  height:100%;
+  background:var(--accent);
+  width:0;
+  border-radius:6px;
+  transition:1.1s ease;
+}
+
+.chips {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.chip {
+  padding:6px 14px;
+  background:var(--chip);
+  border-radius:14px;
+  font-size:13px;
+}
+
+/* ========= Timeline / Experience ========= */
+.timeline {
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+.tlexp summary {
+  background:var(--card);
+  padding:18px;
+  border-radius:14px;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(8px);
+  list-style:none;
+}
+
+.tlexp .body {
+  background:var(--card);
+  border-radius:14px;
+  padding:18px;
+  margin-top:12px;
+  box-shadow:var(--shadow);
+}
+
+/* ========= Contact ========= */
+.btn {
+  padding:8px 16px;
+  border:1px solid var(--accent);
+  border-radius:20px;
+  background:none;
+  color:var(--accent);
+  text-decoration:none;
+  font-weight:500;
+  transition:.25s;
+}
+
+.btn:hover {
+  background:var(--accent);
+  color:#fff;
+}
+
+/* ========= Animation Helpers ========= */
+[data-animate] {
+  opacity:0;
+  transform:translateY(14px);
+  transition:.7s ease;
+}
+
 </style>
 </head>
 <body>
