@@ -2,313 +2,451 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Perala Akshaya — Portfolio</title>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 
 <style>
+/* =============================== */
+/*        PASTEL PURPLE THEME      */
+/* =============================== */
 
-/* ===================================== */
-/* ROOT DESIGN TOKENS — PINK + PEACH THEME */
-/* ===================================== */
 :root {
-  --bg-light: #ffeef3;
-  --bg-peach: #ffdce8;
-  --text-dark: #3b3b3b;
-  --text-light: #777;
-  --white: #ffffff;
-  --accent: #ff7ba5;
-  --card-bg: rgba(255, 255, 255, 0.65);
-  --shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-  --radius: 18px;
+  --bg1: #fde9f4;
+  --bg2: #f7eaff;
+  --bg3: #fdf3ff;
+  --fg: #4a325a;
+  --muted: #937a99;
+  --accent1: #f3a6eb;   /* pastel pink */
+  --accent2: #c29cff;   /* pastel lavender */
+  --accent3: #f7c6ff;   /* soft blush */
+  --card: rgba(255, 255, 255, 0.6);
+  --shadow: 0 15px 35px rgba(170, 120, 200, 0.25);
+  --glow: 0 0 18px rgba(220, 160, 255, 0.4);
 }
 
 /* RESET */
 * {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Poppins",sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  background: linear-gradient(180deg, var(--bg-light), var(--bg-peach));
-  color: var(--text-dark);
+  background: linear-gradient(145deg, var(--bg1), var(--bg2), var(--bg3));
+  color: var(--fg);
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
-/* HEADER */
+/* Background floating glow */
+.bg-gradient {
+  position: fixed;
+  inset: 0;
+  z-index: -5;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(243, 166, 235, 0.25), transparent 50%),
+    radial-gradient(circle at 80% 30%, rgba(194, 156, 255, 0.2), transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(247, 198, 255, 0.25), transparent 55%),
+    linear-gradient(145deg, var(--bg1), var(--bg2), var(--bg3));
+  animation: hueShift 15s ease-in-out infinite alternate;
+}
+
+@keyframes hueShift {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(20deg); }
+}
+
+/* =============================== */
+/*             HEADER              */
+/* =============================== */
+
 header {
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:18px 30px;
-  display:flex;
-  justify-content:center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 16px 40px;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.45);
+  border-bottom: 1px solid rgba(200, 160, 255, 0.3);
   z-index: 999;
-  backdrop-filter: blur(12px);
-  background: rgba(255, 240, 245, 0.45);
 }
 
-header nav {
-  display:flex;
-  align-items:center;
-  gap:35px;
-  font-size: 15px;
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header a {
-  color: var(--text-dark);
-  text-decoration: none;
+.brand {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+nav a {
+  color: var(--fg);
   font-weight: 500;
-  opacity: 0.85;
+  text-decoration: none;
+  position: relative;
 }
 
-header a:hover,
-header a.active {
-  color: var(--accent);
-  opacity: 1;
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  left: 0;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  transition: 0.3s;
 }
 
-/* HERO SECTION */
+nav a:hover::after,
+nav a.active::after {
+  width: 100%;
+}
+
+/* =============================== */
+/*             HERO                */
+/* =============================== */
+
 .hero {
-  min-height:100vh;
-  padding:120px 20px 70px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  position:relative;
+  min-height: 100vh;
+  padding-top: 120px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  position: relative;
 }
 
-/* Background image (blurred, soft) */
-.hero::before {
-  content:"";
-  position:absolute;
-  top:0; left:0;
-  width:100%;
-  height:100%;
-  background-image:url('https://i.postimg.cc/28XB4z5R/IMG-9113-2.jpg');
-  background-size:cover;
-  background-position:center;
-  opacity:0.20;
-  filter:blur(8px);
-  z-index:-1;
+.hero-content {
+  max-width: 850px;
+  position: relative;
+  z-index: 1;
 }
 
-/* Main image */
-.hero-img {
-  width:180px;
-  height:180px;
-  border-radius: var(--radius);
-  object-fit:cover;
-  border:5px solid var(--white);
-  box-shadow: var(--shadow);
-  animation: fadeInUp 1s ease forwards;
-}
-
-.hero h1 {
-  font-size:42px;
-  font-weight:700;
-  margin-top:18px;
-  opacity:0;
-  animation: fadeInUp 1.1s ease forwards;
-}
-
-.hero .role {
-  display:inline-block;
-  margin-top:10px;
-  padding:6px 20px;
+.hero-badge {
+  display: inline-block;
+  padding: 10px 26px;
   border-radius: 30px;
-  background: var(--accent);
-  color: #fff;
-  font-size:15px;
-  box-shadow: var(--shadow);
-  opacity:0;
-  animation: fadeInUp 1.2s ease forwards;
+  background: rgba(242, 193, 255, 0.25);
+  border: 1px solid rgba(200, 150, 240, 0.35);
+  color: var(--accent2);
+  font-weight: 600;
+  margin-bottom: 24px;
+  animation: pulse 2.2s infinite;
 }
 
-/* SECTION WRAPPER */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(200,150,255,0.25); }
+  50% { box-shadow: 0 0 18px rgba(200,150,255,0.45); }
+}
+
+/* Rounded-Square Avatar */
+.avatar {
+  width: 210px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 26px;
+  border: 4px solid rgba(220, 170, 255, 0.7);
+  box-shadow: var(--shadow), var(--glow);
+  margin-bottom: 28px;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff, var(--accent2), var(--accent1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 14px;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  color: var(--muted);
+}
+
+.typing-text {
+  border-right: 2px solid var(--accent2);
+  animation: typingBlink 1s infinite;
+}
+
+@keyframes typingBlink {
+  50% { border-color: transparent; }
+}
+
+/* =============================== */
+/*         SECTION & CARD          */
+/* =============================== */
+
 section {
-  max-width:1050px;
-  margin:auto;
-  padding:80px 20px;
+  padding: 90px 0;
 }
 
-/* SECTION TITLE */
 .section-title {
-  font-size:28px;
-  font-weight:600;
-  margin-bottom:20px;
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent2);
+  margin-bottom: 50px;
 }
 
-/* CARD (Glass-like) */
 .card {
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  border-radius: var(--radius);
-  padding:25px;
-  margin-bottom:25px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.5);
+  padding: 30px;
+  margin-bottom: 20px;
   box-shadow: var(--shadow);
-  border: 1px solid rgba(255,255,255,0.6);
+  transition: 0.3s;
 }
 
-/* SKILLS GRID */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow), var(--glow);
+}
+
+/* =============================== */
+/*          SKILLS GRID            */
+/* =============================== */
+
 .skills-grid {
-  display:grid;
-  gap:20px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-@media(min-width:900px){
-  .skills-grid {
-    grid-template-columns: repeat(3,1fr);
-  }
+.skills-category {
+  padding: 28px;
+  border-radius: 20px;
+  background: rgba(240, 210, 255, 0.35);
+  border: 1px solid rgba(210, 180, 255, 0.4);
 }
 
-.chips {
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:10px;
+.skills-category h3 {
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+  color: var(--accent2);
 }
 
-.chip {
-  background:#ffd6e4;
-  padding:8px 12px;
-  border-radius:20px;
-  font-size:13px;
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 14px;
 }
 
-/* TIMELINE */
+.tech-skill {
+  text-align: center;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.45);
+  border: 1px solid rgba(200,160,255,0.2);
+  box-shadow: 0 10px 20px rgba(185,150,240,0.15);
+  transition: 0.3s;
+}
+
+.tech-skill:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.tech-icon {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.tech-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* =============================== */
+/*             TIMELINE            */
+/* =============================== */
+
 .timeline {
-  border-left: 3px solid #ffc3d4;
-  padding-left:25px;
+  border-left: 3px solid var(--accent2);
+  padding-left: 24px;
 }
 
 .tl-item {
-  margin-bottom:22px;
-  position:relative;
+  margin-bottom: 30px;
+  padding-left: 16px;
+  position: relative;
 }
 
 .tl-item::before {
-  content:"";
-  position:absolute;
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  background:var(--accent);
-  left:-31px;
-  top:4px;
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent2);
+  border: 3px solid var(--bg1);
+  position: absolute;
+  left: -25px;
+  top: 6px;
 }
 
-summary {
-  cursor:pointer;
-  font-weight:600;
-  outline:none;
+.tl-item .where {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--accent1);
 }
 
-summary::-webkit-details-marker { display:none; }
-
-/* CONTACT */
-#contact a {
-  color: var(--accent);
-  text-decoration:none;
+.tl-item .when {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 8px;
 }
 
-/* FOOTER */
+/* =============================== */
+/*         CONTACT SECTION         */
+/* =============================== */
+
+.social {
+  display:flex;
+  justify-content:center;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.social a {
+  width:50px;
+  height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  border:1px solid rgba(180,140,255,0.4);
+  font-size:1.3rem;
+  color: var(--accent2);
+  transition:0.3s;
+}
+
+.social a:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow), var(--glow);
+}
+
+/* Footer */
 footer {
   text-align:center;
   padding:30px;
-  font-size:14px;
-  color:var(--text-light);
-  margin-top:40px;
-}
-
-/* ANIMATIONS */
-[data-animate] {
-  opacity:0;
-  transform:translateY(20px);
-  transition:all .7s ease;
-}
-
-@keyframes fadeInUp {
-  from { opacity:0; transform:translateY(20px); }
-  to { opacity:1; transform:translateY(0); }
+  color: var(--muted);
 }
 
 </style>
 </head>
 
 <body>
+<div class="bg-gradient"></div>
 
 <!-- HEADER -->
 <header>
   <nav>
-    <a href="#home" class="active">Home</a>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
+    <div class="brand">Perala Akshaya</div>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </nav>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <img src="https://i.postimg.cc/VvZ5BRmF/IMG-8503.jpg" class="hero-img">
+  <div class="hero-content">
 
-  <h1>Perala Akshaya</h1>
-  <div class="role">Software Developer</div>
+    <div class="hero-badge">
+      <i class="bi bi-stars"></i>
+      Open to Work
+    </div>
+
+    <img src="https://i.postimg.cc/VvZ5BRmF/IMG-8503.jpg" class="avatar" alt="Your Photo">
+
+    <h1 class="hero-title">Perala Akshaya</h1>
+
+    <p class="hero-subtitle">
+      <span class="typing-text">Software Developer</span>
+    </p>
+
+  </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-  <h2 class="section-title">About</h2>
-  <div class="card" data-animate>
-    <p>👋 Hi, I’m Perala Akshaya, a Software Developer with 8 years of IT experience in building scalable, secure, and high-performance applications across Banking, Healthcare, and Finance.</p>
-    <p>I specialize in Java/J2EE, Spring Boot microservices, REST APIs, cloud deployments, and full-stack development with Angular/React.</p>
-    <p>I love clean code, optimized performance, and transforming ideas into elegant software solutions.</p>
+  <h2 class="section-title">About Me</h2>
+
+  <div class="card">
+    <p>Hi, I'm <strong>Perala Akshaya</strong>, a Software Developer with <strong>8+ years of experience</strong> in building scalable web applications across Banking, Healthcare, and Finance industries.</p>
+    <p>I specialize in Java, Spring Boot, REST APIs, AWS Cloud, React, Angular, and modern DevOps tools. My passion lies in designing clean architectures and building elegant UI experiences.</p>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
-  <h2 class="section-title">Skills</h2>
+  <h2 class="section-title">Technical Skills</h2>
 
   <div class="skills-grid">
 
-    <div class="card" data-animate>
-      <h3>Frontend</h3>
-      <div class="chips">
-        <span class="chip">React</span>
-        <span class="chip">Angular</span>
-        <span class="chip">TypeScript</span>
-        <span class="chip">JavaScript</span>
-        <span class="chip">Redux</span>
+    <!-- Frontend -->
+    <div class="skills-category">
+      <h3><i class="bi bi-window"></i> Frontend</h3>
+      <div class="tech-grid">
+        <div class="tech-skill"><i class="devicon-react-original tech-icon"></i><div class="tech-name">React</div></div>
+        <div class="tech-skill"><i class="devicon-angularjs-plain tech-icon"></i><div class="tech-name">Angular</div></div>
+        <div class="tech-skill"><i class="devicon-typescript-plain tech-icon"></i><div class="tech-name">TypeScript</div></div>
+        <div class="tech-skill"><i class="devicon-javascript-plain tech-icon"></i><div class="tech-name">JavaScript</div></div>
       </div>
     </div>
 
-    <div class="card" data-animate>
-      <h3>Backend</h3>
-      <div class="chips">
-        <span class="chip">Java</span>
-        <span class="chip">Spring Boot</span>
-        <span class="chip">REST APIs</span>
-        <span class="chip">Kafka</span>
-        <span class="chip">Spring Security</span>
+    <!-- Backend -->
+    <div class="skills-category">
+      <h3><i class="bi bi-cpu"></i> Backend</h3>
+      <div class="tech-grid">
+        <div class="tech-skill"><i class="devicon-java-plain tech-icon"></i><div class="tech-name">Java</div></div>
+        <div class="tech-skill"><i class="devicon-spring-plain tech-icon"></i><div class="tech-name">Spring Boot</div></div>
+        <div class="tech-skill"><i class="bi bi-api tech-icon"></i><div class="tech-name">REST APIs</div></div>
+        <div class="tech-skill"><i class="devicon-apachekafka-plain tech-icon"></i><div class="tech-name">Kafka</div></div>
       </div>
     </div>
 
-    <div class="card" data-animate>
-      <h3>Cloud / DevOps</h3>
-      <div class="chips">
-        <span class="chip">AWS</span>
-        <span class="chip">Docker</span>
-        <span class="chip">Kubernetes</span>
-        <span class="chip">CI/CD</span>
-        <span class="chip">GCP</span>
+    <!-- Cloud -->
+    <div class="skills-category">
+      <h3><i class="bi bi-cloud"></i> Cloud & DevOps</h3>
+      <div class="tech-grid">
+        <div class="tech-skill"><i class="devicon-amazonwebservices-original tech-icon"></i><div class="tech-name">AWS</div></div>
+        <div class="tech-skill"><i class="devicon-docker-plain tech-icon"></i><div class="tech-name">Docker</div></div>
+        <div class="tech-skill"><i class="devicon-kubernetes-plain tech-icon"></i><div class="tech-name">K8s</div></div>
+        <div class="tech-skill"><i class="devicon-git-plain tech-icon"></i><div class="tech-name">Git</div></div>
       </div>
     </div>
 
@@ -317,70 +455,74 @@ footer {
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <h2 class="section-title">Experience</h2>
+  <h2 class="section-title">Professional Experience</h2>
 
-  <div class="timeline">
+  <div class="card">
+    <div class="timeline">
 
-    <div class="tl-item" data-animate>
-      <details open>
-        <summary>PNC Bank | Full Stack Developer (Nov 2023 – Present)</summary>
-        <div class="card" style="margin-top:10px;">
-          <ul>
-            <li>Developed scalable Spring Boot microservices improving API performance.</li>
-            <li>Built high-quality React UI features using reusable components.</li>
-            <li>Implemented OAuth2/JWT authentication for secure workflows.</li>
-            <li>Used Oracle + NoSQL hybrid model for real-time transactions.</li>
-          </ul>
-        </div>
-      </details>
+      <div class="tl-item">
+        <div class="where">Full Stack Developer — PNC Bank</div>
+        <div class="when">Nov 2023 – Present</div>
+        <p>Building enterprise banking applications with React, Spring Boot, Kafka, AWS, and CI/CD automation.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="where">Full Stack Developer — Volkswagen</div>
+        <div class="when">Sep 2021 – Oct 2023</div>
+        <p>Developed scalable microservices, optimized UI performance, and implemented secure authentication.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="where">Java Developer — Crothall Healthcare</div>
+        <div class="when">Jan 2020 – Aug 2021</div>
+        <p>Built healthcare dashboards, microservices, ETL pipelines, and HIPAA-compliant integrations.</p>
+      </div>
+
     </div>
-
-    <div class="tl-item" data-animate>
-      <details>
-        <summary>Volkswagen | Full Stack Developer (Sep 2021 – Oct 2023)</summary>
-        <div class="card" style="margin-top:10px;">
-          <ul>
-            <li>Built customer-facing modules with React.js and Redux.</li>
-            <li>Created Spring Boot microservices and Kafka event systems.</li>
-            <li>Secured apps using OAuth2/JWT.</li>
-          </ul>
-        </div>
-      </details>
-    </div>
-
-    <div class="tl-item" data-animate>
-      <details>
-        <summary>Crothall Healthcare | Java Developer (Jan 2020 – Aug 2021)</summary>
-        <div class="card" style="margin-top:10px;">
-          <ul>
-            <li>Built Angular dashboards with real-time visualization.</li>
-            <li>Developed microservices for healthcare automation.</li>
-          </ul>
-        </div>
-      </details>
-    </div>
-
   </div>
 </section>
 
 <!-- EDUCATION -->
 <section id="education">
   <h2 class="section-title">Education</h2>
-  <div class="card" data-animate>
-    <p><strong>Masters in Computer Technology</strong> — Eastern Illinois University</p>
-    <p style="margin-top:10px;"><strong>Bachelor of Computer Science</strong> — JNTU Hyderabad</p>
+
+  <div class="card">
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="where">Master's in Computer Technology</div>
+        <p>Eastern Illinois University</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="where">Bachelor of Computer Science</div>
+        <p>JNTU Hyderabad</p>
+      </div>
+
+    </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
   <h2 class="section-title">Contact</h2>
-  <div class="card" data-animate>
-    <p>📍 United States</p>
-    <p>📧 <a href="mailto:peralaakshay5@gmail.com">peralaakshay5@gmail.com</a></p>
-    <p>📞 <a href="tel:+16146653838">+1 (614) 665-3838</a></p>
-    <p style="margin-top:10px;">
-      <a href="https://www.linkedin.com/in/akshaya-perala-35450a229/" target="_blank">LinkedIn Profile</a>
+
+  <div class="card" style="text-align:center;">
+    <h3 style="color: var(--accent2); margin-bottom: 16px;">
+      Let’s Connect!
+    </h3>
+    <p>I'm open to exciting new projects and opportunities.</p>
+
+    <div class="social">
+      <a href="mailto:peralaakshay5@gmail.com"><i class="bi bi-envelope"></i></a>
+      <a href="https://www.linkedin.com/in/akshaya-perala-35450a229/"><i class="bi bi-linkedin"></i></a>
+      <a href="tel:+16146653838"><i class="bi bi-telephone"></i></a>
+    </div>
+
+    <p style="margin-top:20px; color:var(--muted);">
+      📍 United States<br>
+      ✉️ peralaakshay5@gmail.com<br>
+      📞 +1 (614) 665-3838
     </p>
   </div>
 </section>
@@ -390,18 +532,6 @@ footer {
 </footer>
 
 <script>
-// Scroll animations
-const obs = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.style.opacity="1";
-      e.target.style.transform="translateY(0)";
-      obs.unobserve(e.target);
-    }
-  });
-},{threshold:.2});
-
-document.querySelectorAll("[data-animate]").forEach(el=>obs.observe(el));
 document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
