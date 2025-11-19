@@ -1,82 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Perala Akshaya — Portfolio</title>
 
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
+/* ===================================== */
+/* ROOT DESIGN TOKENS — PINK + PEACH THEME */
+/* ===================================== */
 :root {
-  --bg: #fff5f9;
-  --bg2: #ffeaf2;
-  --text: #2b2b2b;
-  --light: #7a7a7a;
-  --accent: #ff8ab3;
-  --card: #ffffff;
-  --shadow: 0 8px 30px rgba(0,0,0,0.08);
+  --bg-light: #ffeef3;
+  --bg-peach: #ffdce8;
+  --text-dark: #3b3b3b;
+  --text-light: #777;
+  --white: #ffffff;
+  --accent: #ff7ba5;
+  --card-bg: rgba(255, 255, 255, 0.65);
+  --shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  --radius: 18px;
 }
 
 /* RESET */
-* { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif; }
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Poppins",sans-serif;
+}
 
 body {
-  background: var(--bg);
-  color: var(--text);
+  background: linear-gradient(180deg, var(--bg-light), var(--bg-peach));
+  color: var(--text-dark);
   overflow-x: hidden;
 }
 
 /* HEADER */
 header {
-  width:100%;
-  padding:20px 40px;
   position:fixed;
   top:0;
-  left:0;
-  backdrop-filter: blur(12px);
-  background: rgba(255,255,255,0.5);
+  width:100%;
+  padding:18px 30px;
+  display:flex;
+  justify-content:center;
   z-index: 999;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 240, 245, 0.45);
 }
 
-nav {
+header nav {
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  max-width:1200px;
-  margin:auto;
+  gap:35px;
+  font-size: 15px;
 }
 
-nav .brand {
-  font-size:22px;
-  font-weight:700;
+header a {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.85;
 }
 
-nav ul {
-  display:flex;
-  gap:25px;
-  list-style:none;
-}
-
-nav ul a {
-  text-decoration:none;
-  color:var(--text);
-  font-weight:500;
-  opacity:.8;
-}
-
-nav ul a:hover,
-nav ul a.active {
-  opacity:1;
+header a:hover,
+header a.active {
   color: var(--accent);
+  opacity: 1;
 }
 
-/* HERO (with background image + main image) */
-
+/* HERO SECTION */
 .hero {
   min-height:100vh;
-  padding:140px 20px 80px;
+  padding:120px 20px 70px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -84,7 +83,7 @@ nav ul a.active {
   position:relative;
 }
 
-/* BACKGROUND IMAGE */
+/* Background image (blurred, soft) */
 .hero::before {
   content:"";
   position:absolute;
@@ -94,58 +93,66 @@ nav ul a.active {
   background-image:url('https://i.postimg.cc/28XB4z5R/IMG-9113-2.jpg');
   background-size:cover;
   background-position:center;
-  opacity:.18;
-  filter:blur(6px);
+  opacity:0.20;
+  filter:blur(8px);
   z-index:-1;
 }
 
-/* MAIN PORTRAIT */
+/* Main image */
 .hero-img {
   width:180px;
   height:180px;
+  border-radius: var(--radius);
   object-fit:cover;
-  border-radius:14px;
-  box-shadow:var(--shadow);
-  border:4px solid #fff;
+  border:5px solid var(--white);
+  box-shadow: var(--shadow);
+  animation: fadeInUp 1s ease forwards;
 }
 
 .hero h1 {
-  margin-top:20px;
-  font-size:38px;
+  font-size:42px;
   font-weight:700;
+  margin-top:18px;
+  opacity:0;
+  animation: fadeInUp 1.1s ease forwards;
 }
 
 .hero .role {
-  background: var(--accent);
-  color:#fff;
-  padding:6px 16px;
-  border-radius:40px;
-  margin-top:10px;
   display:inline-block;
+  margin-top:10px;
+  padding:6px 20px;
+  border-radius: 30px;
+  background: var(--accent);
+  color: #fff;
   font-size:15px;
+  box-shadow: var(--shadow);
+  opacity:0;
+  animation: fadeInUp 1.2s ease forwards;
 }
 
-/* SECTIONS */
+/* SECTION WRAPPER */
 section {
-  max-width:1150px;
+  max-width:1050px;
   margin:auto;
-  padding:100px 20px;
+  padding:80px 20px;
 }
 
+/* SECTION TITLE */
 .section-title {
-  font-size:30px;
-  margin-bottom:25px;
+  font-size:28px;
   font-weight:600;
-  text-align:left;
+  margin-bottom:20px;
 }
 
-/* CARDS */
+/* CARD (Glass-like) */
 .card {
-  background:var(--card);
-  border-radius:16px;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
   padding:25px;
-  box-shadow:var(--shadow);
   margin-bottom:25px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,0.6);
 }
 
 /* SKILLS GRID */
@@ -168,7 +175,7 @@ section {
 }
 
 .chip {
-  background:#ffe3ed;
+  background:#ffd6e4;
   padding:8px 12px;
   border-radius:20px;
   font-size:13px;
@@ -176,23 +183,23 @@ section {
 
 /* TIMELINE */
 .timeline {
-  border-left:3px solid #ffd0df;
-  padding-left:20px;
+  border-left: 3px solid #ffc3d4;
+  padding-left:25px;
 }
 
 .tl-item {
-  margin-bottom:25px;
+  margin-bottom:22px;
   position:relative;
 }
 
 .tl-item::before {
   content:"";
   position:absolute;
-  width:12px;
-  height:12px;
-  background: var(--accent);
+  width:14px;
+  height:14px;
   border-radius:50%;
-  left:-27px;
+  background:var(--accent);
+  left:-31px;
   top:4px;
 }
 
@@ -210,42 +217,47 @@ summary::-webkit-details-marker { display:none; }
   text-decoration:none;
 }
 
+/* FOOTER */
 footer {
   text-align:center;
   padding:30px;
-  color:var(--light);
   font-size:14px;
-  margin-top:80px;
+  color:var(--text-light);
+  margin-top:40px;
 }
 
 /* ANIMATIONS */
 [data-animate] {
   opacity:0;
-  transform:translateY(15px);
-  transition:all .6s ease;
+  transform:translateY(20px);
+  transition:all .7s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
 }
 
 </style>
 </head>
+
 <body>
 
+<!-- HEADER -->
 <header>
   <nav>
-    <div class="brand">Perala Akshaya</div>
-    <ul>
-      <li><a class="active" href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <a href="#home" class="active">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
   </nav>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <img src="https://i.postimg.cc/VvZ5BRmF/IMG-8503.jpg" class="hero-img" alt="Portrait">
+  <img src="https://i.postimg.cc/VvZ5BRmF/IMG-8503.jpg" class="hero-img">
 
   <h1>Perala Akshaya</h1>
   <div class="role">Software Developer</div>
@@ -255,10 +267,9 @@ footer {
 <section id="about">
   <h2 class="section-title">About</h2>
   <div class="card" data-animate>
-    <p>👋 Hi, I’m Perala Akshaya, a Software Developer with 8 years of IT experience in designing and delivering scalable web applications across diverse industries including Banking, Healthcare, and Finance.</p>
-    <p>Proficient in Java/J2EE technologies, Spring Boot, MVC, Security, Microservices, and REST API development.</p>
-    <p>Skilled with AWS Cloud (EC2, S3, RDS, CloudFormation, CodePipeline), CI/CD, infrastructure automation, and scalable systems.</p>
-    <p>Experienced in React, Angular, JavaScript, TypeScript, UI development, and responsive front-end architecture.</p>
+    <p>👋 Hi, I’m Perala Akshaya, a Software Developer with 8 years of IT experience in building scalable, secure, and high-performance applications across Banking, Healthcare, and Finance.</p>
+    <p>I specialize in Java/J2EE, Spring Boot microservices, REST APIs, cloud deployments, and full-stack development with Angular/React.</p>
+    <p>I love clean code, optimized performance, and transforming ideas into elegant software solutions.</p>
   </div>
 </section>
 
@@ -274,6 +285,7 @@ footer {
         <span class="chip">React</span>
         <span class="chip">Angular</span>
         <span class="chip">TypeScript</span>
+        <span class="chip">JavaScript</span>
         <span class="chip">Redux</span>
       </div>
     </div>
@@ -285,17 +297,18 @@ footer {
         <span class="chip">Spring Boot</span>
         <span class="chip">REST APIs</span>
         <span class="chip">Kafka</span>
+        <span class="chip">Spring Security</span>
       </div>
     </div>
 
     <div class="card" data-animate>
-      <h3>Cloud & DevOps</h3>
+      <h3>Cloud / DevOps</h3>
       <div class="chips">
         <span class="chip">AWS</span>
         <span class="chip">Docker</span>
         <span class="chip">Kubernetes</span>
-        <span class="chip">GCP</span>
         <span class="chip">CI/CD</span>
+        <span class="chip">GCP</span>
       </div>
     </div>
 
@@ -313,10 +326,10 @@ footer {
         <summary>PNC Bank | Full Stack Developer (Nov 2023 – Present)</summary>
         <div class="card" style="margin-top:10px;">
           <ul>
-            <li>Built interactive UIs using React.js with optimized performance and reusable architecture.</li>
-            <li>Developed Spring Boot microservices improving API response and scalability.</li>
-            <li>Implemented OAuth2/JWT Security ensuring compliance for sensitive workflows.</li>
-            <li>Used hybrid Oracle + Couchbase model for high-frequency transactions.</li>
+            <li>Developed scalable Spring Boot microservices improving API performance.</li>
+            <li>Built high-quality React UI features using reusable components.</li>
+            <li>Implemented OAuth2/JWT authentication for secure workflows.</li>
+            <li>Used Oracle + NoSQL hybrid model for real-time transactions.</li>
           </ul>
         </div>
       </details>
@@ -327,9 +340,9 @@ footer {
         <summary>Volkswagen | Full Stack Developer (Sep 2021 – Oct 2023)</summary>
         <div class="card" style="margin-top:10px;">
           <ul>
-            <li>Built React modules improving conversions with optimized UI workflows.</li>
-            <li>Created scalable microservices integrating Kafka event-driven architecture.</li>
-            <li>Implemented OAuth2/JWT for secure PCI-compliant systems.</li>
+            <li>Built customer-facing modules with React.js and Redux.</li>
+            <li>Created Spring Boot microservices and Kafka event systems.</li>
+            <li>Secured apps using OAuth2/JWT.</li>
           </ul>
         </div>
       </details>
@@ -340,8 +353,8 @@ footer {
         <summary>Crothall Healthcare | Java Developer (Jan 2020 – Aug 2021)</summary>
         <div class="card" style="margin-top:10px;">
           <ul>
-            <li>Developed Angular dashboards and D3.js visualizations for patient monitoring.</li>
-            <li>Created Spring Boot microservices for healthcare reporting automation.</li>
+            <li>Built Angular dashboards with real-time visualization.</li>
+            <li>Developed microservices for healthcare automation.</li>
           </ul>
         </div>
       </details>
@@ -377,8 +390,8 @@ footer {
 </footer>
 
 <script>
-// Fade-in animation
-const obs = new IntersectionObserver(entries=>{
+// Scroll animations
+const obs = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       e.target.style.opacity="1";
