@@ -1,0 +1,7 @@
+﻿# Ignore OS and editor files
+*.exe
+*.msi
+*.zip
+*.lnk
+*.docx
+*.pdf

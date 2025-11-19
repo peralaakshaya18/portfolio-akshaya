@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perala Akshaya — Portfolio</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:#0f1224;           /* dark base */
+      --bg-2:#14183a;         /* dark deeper */
+      --fg:#e8ebff;           /* text */
+      --muted:#aab0d6;        /* dim text */
+      --accent:#6ef3a5;       /* mint */
+      --accent-2:#7aa2ff;     /* blue */
+      --card: #171c3cbb;      /* glass card */
+      --ring:#2b3168;         /* borders */
+      --chip:#242a56;         /* pill */
+      --shadow: 0 10px 40px #0007;
+    }
+    [data-theme="light"]{
+      --bg:#fcfcff; --bg-2:#eef2ff; --fg:#101225; --muted:#5a617b; --card:#ffffffcc; --ring:#e6e9f8; --chip:#f2f4ff; --shadow: 0 10px 30px #0002;
+      --accent:#0AA66C; --accent-2:#2b59ff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--fg); background: var(--bg);
+      overflow-x:hidden; line-height:1.6;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1140px;margin:0 auto;padding:0 20px}
+
+    /* ===== Animated Background ===== */
+    .bg-gradient{position:fixed; inset:0; z-index:-3; background:
+      radial-gradient(90rem 90rem at 110% -10%, #5f7fff22, #0000 40%),
+      radial-gradient(90rem 90rem at -10% 110%, #00ffb322, #0000 40%),
+      linear-gradient(180deg, var(--bg), var(--bg-2));}
+    /* canvas.particles{position:fixed; inset:0; z-index:-2; filter:blur(0.3px); opacity:.6;} */
+
+    /* ===== Header / Navbar ===== */
+    header{position:sticky; top:0; z-index:50; backdrop-filter: blur(10px);
+      background: linear-gradient(#0b0e22cc,#0b0e2200); border-bottom:1px solid #ffffff10}
+    nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{font-weight:700; letter-spacing:.3px}
+    .nav-links{display:flex; gap:18px; list-style:none; margin:0; padding:0}
+    .nav-links a{opacity:.9}
+    .nav-links a:hover, .nav-links a.active{opacity:1; color:var(--accent)}
+    .actions{display:flex; align-items:center; gap:10px}
+    .icon-btn{width:40px; height:40px; display:grid; place-items:center; border-radius:10px; border:1px solid #ffffff1a; background:#1b214e88}
+    .icon-btn:hover{border-color:#ffffff40}
+
+    /* ===== Sections ===== */
+    section{padding:90px 0; position:relative}
+    h2.section-title{margin:0 0 18px; font-size: clamp(22px, 4vw, 32px); display:flex; align-items:center; gap:10px}
+    .lead{color:var(--muted)}
+    .card{background:var(--card); border:1px solid #ffffff18; border-radius:16px; padding:22px; box-shadow:var(--shadow)}
+
+    /* ===== Hero ===== */
+    .hero{display:grid; place-items:center; min-height:calc(100vh - 64px); text-align:center}
+    /* Hero content centered over full-bleed background */
+    .hero-content{position:relative; z-index:1; text-align:center; width:min(900px, 92vw); padding:24px}
+    .hero .overlay{position:absolute; inset:0; background:rgba(0,0,0,0.45)}
+    /* scrolling title (marquee) */
+    .scroll-wrap{position:relative; overflow:hidden; width:min(680px, 90vw); height:32px; margin:10px auto 0}
+    .scrolling-title{display:inline-block; white-space:nowrap; font-size: clamp(16px, 2.6vw, 20px); color:#cfd3ee; animation: marquee 8s linear infinite}
+    @keyframes marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+    @media (prefers-reduced-motion: reduce){ .scrolling-title{animation:none} }
+    .ring{position:absolute; inset:-2px; border-radius:22px; border:2px solid var(--ring); opacity:.6; pointer-events:none}
+    .eyebrow{font-size:14px; color:var(--muted); letter-spacing:.25em; text-transform:uppercase}
+    .title{font-size: clamp(28px, 6vw, 54px); margin:10px 0 6px}
+    .subtitle{font-size: clamp(16px, 3.5vw, 20px); color:var(--muted); margin-bottom:18px}
+    .chips{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:18px 0 24px}
+    .chip{background:var(--chip); border:1px solid #ffffff15; padding:8px 12px; border-radius:999px; font-size:13px}
+    .cta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:8px}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid #ffffff20; background:#222756; color:#fff; font-weight:600; transition:.15s}
+    .btn:hover{transform:translateY(-1px); border-color:#ffffff35; box-shadow:0 8px 24px #0006}
+    .btn.alt{background:transparent}
+    .avatar{width:160px; height:160px; border-radius:50%; object-fit:cover; border:3px solid var(--ring); margin-bottom:16px}
+
+    /* ===== Skills (dynamic / animated) ===== */
+    .skills-grid{display:grid; gap:16px}
+    @media(min-width:860px){ .skills-grid{grid-template-columns:repeat(3, 1fr)} }
+    .skills-group h3{margin:0 0 12px}
+    .bar{height:10px; border-radius:999px; background:#ffffff14; overflow:hidden; border:1px solid #ffffff1a}
+    .bar > span{display:block; height:100%; width:0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition:width 1.2s ease}
+
+    /* ===== Timeline (Experience) ===== */
+    .timeline{position:relative; margin-left:10px}
+    .timeline::before{content:""; position:absolute; left:10px; top:0; bottom:0; width:2px; background:#ffffff22}
+    .tl-item{position:relative; margin-left:28px; margin-bottom:18px}
+    .tl-item::before{content:""; position:absolute; left:-18px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--accent)}
+    .tl-item .head{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .tl-item .where{font-weight:600}
+    details.tlexp{background:var(--card); border:1px solid #ffffff18; border-radius:12px; padding:14px}
+    details.tlexp[open] .chev{transform:rotate(180deg)}
+    .chev{transition:transform .2s ease}
+
+    /* ===== Projects (filterable) ===== */
+    .filters{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px}
+    .filter{padding:8px 12px; border-radius:999px; border:1px solid #ffffff22; background:transparent; color:var(--fg); cursor:pointer}
+    .filter.active{background:var(--chip)}
+    .projects{display:grid; gap:16px}
+    @media(min-width:860px){ .projects{grid-template-columns:repeat(3,1fr)} }
+    .project{overflow:hidden; border-radius:14px; border:1px solid #ffffff18; background:#11152f}
+    .project img{width:100%; height:180px; object-fit:cover; display:block; filter:saturate(1.1)}
+    .project .p-body{padding:12px}
+
+    /* ===== Contact ===== */
+    #contact .card{ text-align:center }
+    .social{display:flex; gap:12px; justify-content:center}
+    .social a{display:inline-flex; width:40px; height:40px; align-items:center; justify-content:center; border-radius:50%; background:#2a2f5b; border:1px solid #ffffff14}
+
+    /* ===== Utilities ===== */
+    .hidden{display:none !important}
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">Perala Akshaya</div>
+        <ul class="nav-links">
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="actions">
+          <button id="themeToggle" class="icon-btn" aria-label="Toggle theme"><i class="bi bi-sun"></i></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home" style="background:url('https://i.postimg.cc/yYsWXBdJ/IMG-9113.jpg') center top / contain no-repeat, #000; position:relative;">
+    <div class="overlay"></div>
+    <div class="container" style="display:grid; place-items:center; position:relative; z-index:1; min-height:inherit;">
+      <div class="hero-content">
+        <div class="eyebrow">Hello, I’m</div>
+        <h1 class="title">Perala Akshaya</h1>
+        <div class="scroll-wrap"><span class="scrolling-title">Software Developer</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title"><i class="bi bi-person-circle"></i> About</h2>
+      <div class="card" data-animate>
+        <p>👋 Hi, I’m  Perala Akshaya , a Software Developer with 8 years of IT experience in designing and delivering scalable web applications across diverse industries including Banking, Healthcare, and Finance.</p>
+        <p>Proficient in Java/J2EE technologies including Core Java 8, Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Spring Batch, and Hibernate, with expertise in developing RESTful and microservice-based architectures.</p>
+        <p>Strong hands-on experience in AWS Cloud, leveraging EC2, S3, RDS, EBS, ELB, CloudFormation, CodePipeline, CodeBuild, and CodeDeploy for infrastructure automation, CI/CD, and high-availability deployments.</p>
+        <p>Skilled in front-end development using ReactJS, Angular, JavaScript (ES6+), TypeScript, jQuery, Bootstrap, and HTML5/CSS3, focusing on modular UI design, performance optimization, and responsive layouts.</p>
+        <p>Deep understanding of Core Java SE 8 concepts such as Streams API, Generics, Functional Interfaces, Lambda expressions, Exception Handling, and Collections Framework for efficient and clean coding practices.</p>
+        <p>Experienced in designing object-relational mappings (ORM) using Hibernate, with advanced HQL, native SQL, and entity relationship management (One-to-One, One-to-Many, Many-to-Many).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title"><i class="bi bi-stars"></i> Skills</h2>
+      <div class="skills-grid">
+        <div class="card skills-group" data-animate>
+          <h3>Frontend</h3>
+          <div class="bar"><span data-pct="90"></span></div>
+          <div class="chips" style="margin-top:10px">
+            <span class="chip">React</span><span class="chip">Angular</span><span class="chip">TypeScript</span><span class="chip">Redux</span>
+          </div>
+        </div>
+        <div class="card skills-group" data-animate>
+          <h3>Backend</h3>
+          <div class="bar"><span data-pct="88"></span></div>
+          <div class="chips" style="margin-top:10px">
+            <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">REST</span><span class="chip">Kafka</span>
+          </div>
+        </div>
+        <div class="card skills-group" data-animate>
+          <h3>Cloud & DevOps</h3>
+          <div class="bar"><span data-pct="85"></span></div>
+          <div class="chips" style="margin-top:10px">
+            <span class="chip">AWS</span><span class="chip">Azure</span><span class="chip">GCP</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Experience (timeline + collapsible) -->
+  <section id="experience">
+    <div class="container">
+      <h2 class="section-title"><i class="bi bi-briefcase"></i> Professional Experience</h2>
+      <div class="timeline">
+        <div class="tl-item" data-animate>
+          <details class="tlexp" open>
+            <summary class="head"><span class="where">PNC Bank | Pittsburgh, PA (Nov 2023 – Present) · Full Stack Developer</span><span class="chev bi bi-chevron-down"></span></summary>
+            <div class="body lead" style="margin-top:10px">
+              <ul style="margin:0 0 0 18px; padding:0">
+                <li>Built interactive UIs in React.js with reusable components, role-based navigation, and optimized performance (lazy loading, code splitting).</li>
+                <li>Developed Spring Boot microservices with AOP, annotations, and RxJava, reducing API response times and improving scalability.</li>
+                <li>Secured applications with Spring Security, OAuth2/JWT, and SSO, ensuring compliance for banking workflows.</li>
+                <li>Designed hybrid data solutions integrating Oracle RDBMS with Couchbase NoSQL for real-time, high-frequency transactions.</li>
+                <li>Automated CI/CD with Jenkins, GitHub Actions, and AWS CodePipeline, deploying containerized microservices on AWS/OpenShift.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <div class="tl-item" data-animate>
+          <details class="tlexp">
+            <summary class="head"><span class="where">Client: Volkswagen | Rochester, MI (Sep 2021 – oct 2023) · Full Stack Developer</span><span class="chev bi bi-chevron-down"></span></summary>
+            <div class="body lead" style="margin-top:10px">
+              <ul style="margin:0 0 0 18px; padding:0">
+                <li>Engineered customer-facing modules (filters, cart, checkout) with React.js, Redux, Context API, improving conversions.</li>
+                <li>Built scalable Spring Boot microservices and Kafka-based event-driven architecture for real-time inventory/order updates.</li>
+                <li>Applied Spring Security (OAuth2/JWT) for secure PCI-compliant payments and customer authentication.</li>
+                <li>Enhanced search with GraphQL + Elasticsearch, improving accuracy and reducing over-fetching during high-traffic peaks.</li>
+                <li>Deployed services on AWS (EC2, RDS, S3, IAM, CloudWatch, SQS/SNS) orchestrated with Kubernetes & Terraform for scalability.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <div class="tl-item" data-animate>
+          <details class="tlexp">
+            <summary class="head"><span class="where">Client: Crothall Healthcare | Wayne, PA (Jan 2020 – Aug 2021) · Java Developer</span><span class="chev bi bi-chevron-down"></span></summary>
+            <div class="body lead" style="margin-top:10px">
+              <ul style="margin:0 0 0 18px; padding:0">
+                <li>Built Angular dashboards & portals with D3.js visualizations for patient vitals and real-time monitoring.</li>
+                <li>Developed Spring Boot microservices & Spring Batch ETL jobs for EHR, billing, and compliance-driven reporting.</li>
+                <li>Secured healthcare applications with Spring Security, OAuth2/JWT, SSO, ensuring HIPAA compliance.</li>
+                <li>Integrated HL7 and FHIR APIs for seamless exchange of clinical data across systems and providers.</li>
+                <li>Deployed applications on AWS (EC2, RDS, S3, CloudFormation) with automated pipelines in Jenkins/Bitbucket.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <div class="tl-item" data-animate>
+          <details class="tlexp">
+            <summary class="head"><span class="where">Client: Knoah Solutions | Hyderabad, India (July 2018 – Dec 2019) · Java Developer </span><span class="chev bi bi-chevron-down"></span></summary>
+            <div class="body lead" style="margin-top:10px">
+              <ul style="margin:0 0 0 18px; padding:0">
+                <li>Developed interactive AngularJS/Angular 2+ modules and reusable UI components for dashboards and workflows.</li>
+                <li>Built REST & SOAP APIs with Spring MVC, JAX-RS, and Node.js (Express.js) for integrations with CRM and payment systems.</li>
+                <li>Designed hybrid data storage with MongoDB (NoSQL) and MySQL/Oracle (RDBMS) for structured + unstructured data.</li>
+                <li>Containerized services with Docker and automated deployments via Jenkins CI/CD, reducing manual errors.</li>
+                <li>Ensured quality via JUnit + Selenium automation, validating functionality across browsers and environments.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
+    <div class="container">
+      <h2 class="section-title"><i class="bi bi-mortarboard-fill"></i> Education</h2>
+      <div class="card" data-animate>
+        <ul style="list-style:none; padding:0; margin:0">
+          <li><strong>Masters in computer technology</strong> — Eastern Illinois University - IL</li>
+          <li style="margin-top:10px"><strong>Jawaharlal Nehru Technological University — Bachelor of Computer’s</strong> — Hyderabad, India</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title"><i class="bi bi-envelope"></i> Contact</h2>
+      <div class="card" data-animate style="text-align:center">
+        <p><i class="bi bi-geo-alt"></i> United States</p>
+        <p><i class="bi bi-envelope"></i> <a href="mailto:peralaakshaya5@gmail.com">peralaakshay5@gmail.com</a></p>
+        <p><i class="bi bi-telephone"></i> <a href="tel:+16146653838">+1 (614) 665-3838</a></p>
+        <p style="margin-top:10px">
+          <a href="https://www.linkedin.com/in/akshaya-perala-35450a229/" target="_blank" rel="noopener" class="btn alt" style="border-color:#0A66C2;color:#0A66C2"><i class="bi bi-linkedin"></i> LinkedIn</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding:36px 0; text-align:center; color:var(--muted); border-top:1px solid #ffffff18">
+    <div class="container">© <span id="year"></span> Panakanti Indu</div>
+  </footer>
+
+  <!-- ===== JS ===== -->
+  <script>
+    // ============ Theme Toggle ============
+    const themeToggle = document.getElementById('themeToggle');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme){ document.documentElement.setAttribute('data-theme', savedTheme); }
+    else if(prefersLight){ document.documentElement.setAttribute('data-theme', 'light'); }
+    themeToggle.addEventListener('click', ()=>{
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'light' ? 'dark' : 'light';
+      if(next === 'dark') document.documentElement.removeAttribute('data-theme');
+      else document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeToggle.innerHTML = next === 'light' ? '<i class="bi bi-moon"></i>' : '<i class="bi bi-sun"></i>';
+    });
+
+    // ============ Particles Background ============
+    // (Particle background removed)
+
+
+    // ============ ScrollSpy + SmoothScroll ============
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(a=> a.addEventListener('click', (e)=>{ const id=a.getAttribute('href'); if(id.startsWith('#')){ e.preventDefault(); document.querySelector(id).scrollIntoView({behavior:'smooth'}); }}));
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{ if(en.isIntersecting){ links.forEach(l=>l.classList.toggle('active', l.getAttribute('href') === '#' + en.target.id)); } });
+    }, {threshold:.6});
+    document.querySelectorAll('section').forEach(s=>obs.observe(s));
+
+    // ============ Animate on reveal ============
+    const reveal = new IntersectionObserver((es)=>{
+      es.forEach(en=>{ if(en.isIntersecting){ en.target.style.transform='translateY(0)'; en.target.style.opacity='1'; reveal.unobserve(en.target); } });
+    }, {threshold:.2});
+    document.querySelectorAll('[data-animate]').forEach(el=>{ el.style.transform='translateY(12px)'; el.style.opacity='.001'; el.style.transition='all .6s ease'; reveal.observe(el); });
+
+    // ============ Skill bars fill on view ============
+    const bars = document.querySelectorAll('.bar > span');
+    const fillObs = new IntersectionObserver((es)=>{
+      es.forEach(en=>{ if(en.isIntersecting){ en.target.style.width = en.target.dataset.pct + '%'; fillObs.unobserve(en.target); } });
+    }, {threshold:.6});
+    bars.forEach(b=>fillObs.observe(b));
+
+    // ============ Projects Filter ============
+    const filterBtns = document.querySelectorAll('.filter');
+    const items = document.querySelectorAll('.project');
+    filterBtns.forEach(btn=> btn.addEventListener('click', ()=>{
+      filterBtns.forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+      const tag = btn.dataset.filter; items.forEach(it=>{
+        it.classList.toggle('hidden', !(tag==='all' || it.dataset.tags.includes(tag)));
+      });
+    }));
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
